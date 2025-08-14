@@ -1,8 +1,29 @@
 <!DOCTYPE html>
-<html>
-  <script>alert("abc");
-    console.log("def");
-  </script>
-  <h1>h1</h1>
-  <p>index2</p>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Lekérés</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        #eredmeny-kontener { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background-color: #f9f9f9; }
+        pre { white-space: pre-wrap; word-wrap: break-word; }
+    </style>
+</head>
+<body>
+
+    <h1>Gaisburg U4</h1>
+    <button id="adatok-lekerese">Frissít</button>
+
+    <div id="eredmeny-kontener">
+<p>Városba:</p>
+       <pre id="output1">wait...</pre>
+<p>Kifelé:</p>
+       <pre id="output2">wait...</pre>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
 </html>
+
