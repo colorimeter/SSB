@@ -5,25 +5,197 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Lekérés</title>
     <style>
-        body { font-family: sans-serif; padding: 0px; }
-        #eredmeny-kontener { margin-top: 20px; padding: 5px; border: 1px solid #ccc; background-color: #f9f9f9; }
-        pre { white-space: pre-wrap; word-wrap: break-word; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 5px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            font-weight: 300;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .controls {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        #adatok-lekerese {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        #adatok-lekerese:hover {
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        #eredmeny-kontener {
+            padding: 10px;
+        }
+
+        .api-section {
+            margin-bottom: 30px;
+            background: #f8f9ff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .api-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .api-header {
+            background: linear-gradient(135deg, #a8edea 0%, #98ddff 100%);
+            padding: 15px 5px;
+            font-weight: 600;
+            color: #333;
+            border-left: 4px solid #667eea;
+        }
+
+        .api-content {
+            padding: 5px;
+        }
+
+        pre {
+            background: #e8e9ea;
+            color: #000000;
+            padding: 10px;
+            border-radius: 10px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-style: normal;
+	    font-weight: bold;
+            line-height: 1.6;
+            border: 1px solid #e9ecef;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .controls, #eredmeny-kontener {
+                padding: 10px;
+            }
+            
+            #adatok-lekerese {
+                padding: 12px 30px;
+                font-size: 1em;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <h1>Gaisburg U4</h1>
-    <button id="adatok-lekerese">Frissít</button>
-
-    <div id="eredmeny-kontener">
-<p>Városba:</p>
-       <pre id="output1">wait...</pre>
-<p>Kifelé:</p>
-       <pre id="output2">wait...</pre>
+    <div class="container">
+        <div class="header">
+            <h1>🚌 Járatinfó</h1>
+            <p>Aktuálisan érkező járatok</p>
+        </div>
+        
+        <div class="controls">
+            <button id="adatok-lekerese">🔄 Frissít</button>
+        </div>
+        
+        <div id="eredmeny-kontener">
+            <div class="api-section">
+                <div class="api-header">Gaisburg → Belváros</div>
+                <div class="api-content">
+                    <pre id="output1">Adatok betöltése...</pre>
+                </div>
+            </div>
+            
+            <div class="api-section">
+                <div class="api-header">Gaisburg → Kifelé</div>
+                <div class="api-content">
+                    <pre id="output2">Adatok betöltése...</pre>
+                </div>
+            </div>
+            
+            <div class="api-section">
+                <div class="api-header">Staatsgalerie → Gaisburg</div>
+                <div class="api-content">
+                    <pre id="output3">Adatok betöltése...</pre>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            Utolsó frissítés: <span id="last-update">-</span>
+        </div>
     </div>
-
+    
     <script src="script.js"></script>
-
+    <script>
+        // Frissítési idő hozzáadása
+        document.getElementById('adatok-lekerese').addEventListener('click', function() {
+            document.getElementById('last-update').textContent = new Date().toLocaleString('hu-HU');
+        });
+        
+        // Kezdeti időpontot is beállítjuk
+        document.getElementById('last-update').textContent = new Date().toLocaleString('hu-HU');
+    </script>
 </body>
 </html>
-
