@@ -13,9 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
              return `${c} perc múlva (${h}:${m}) → ${direction}`;
      }
 
+		const api_prefix = 'https://www3.vvs.de/vvs/widget/XML_DM_REQUEST?locationServerActive=1&lsShowTrainsExplicit=1&stateless=1&language=de&SpEncId=0&anySigWhenPerfectNoOtherMatches=1&depArr=departure&type_dm=any&anyObjFilter_dm=2&deleteAssignedStops=1&mode=direct&dmLineSelectionAll=1&useRealtime=1&outputFormat=json';
 	// Gaisburg, Staatsgalerie
-        const apiUrl_GB = 'https://www3.vvs.de/vvs/widget/XML_DM_REQUEST?locationServerActive=1&lsShowTrainsExplicit=1&stateless=1&language=de&SpEncId=0&anySigWhenPerfectNoOtherMatches=1&limit=10&depArr=departure&type_dm=any&anyObjFilter_dm=2&deleteAssignedStops=1&name_dm=de%3A08111%3A79&mode=direct&dmLineSelectionAll=1&useRealtime=1&outputFormat=json';
-	const apiUrl_SG = 'https://www3.vvs.de/vvs/widget/XML_DM_REQUEST?locationServerActive=1&lsShowTrainsExplicit=1&stateless=1&language=de&SpEncId=0&anySigWhenPerfectNoOtherMatches=1&limit=40&depArr=departure&type_dm=any&anyObjFilter_dm=2&deleteAssignedStops=1&name_dm=de%3A08111%3A6024&mode=direct&dmLineSelectionAll=1&useRealtime=1&outputFormat=json'
+        //const apiUrl_GB = 'https://www3.vvs.de/vvs/widget/XML_DM_REQUEST?locationServerActive=1&lsShowTrainsExplicit=1&stateless=1&language=de&SpEncId=0&anySigWhenPerfectNoOtherMatches=1&limit=10&depArr=departure&type_dm=any&anyObjFilter_dm=2&deleteAssignedStops=1&name_dm=de%3A08111%3A79&mode=direct&dmLineSelectionAll=1&useRealtime=1&outputFormat=json';
+        //const apiUrl_SG = 'https://www3.vvs.de/vvs/widget/XML_DM_REQUEST?locationServerActive=1&lsShowTrainsExplicit=1&stateless=1&language=de&SpEncId=0&anySigWhenPerfectNoOtherMatches=1&limit=40&depArr=departure&type_dm=any&anyObjFilter_dm=2&deleteAssignedStops=1&name_dm=de%3A08111%3A6024&mode=direct&dmLineSelectionAll=1&useRealtime=1&outputFormat=json'
+		//const apiUrl_SM = 'https://www3.vvs.de/vvs/widget/XML_DM_REQUEST?locationServerActive=1&lsShowTrainsExplicit=1&stateless=1&language=de&SpEncId=0&anySigWhenPerfectNoOtherMatches=1&limit=20&depArr=departure&type_dm=any&anyObjFilter_dm=2&deleteAssignedStops=1&name_dm=de%3A08111%3A6056%3A2%3A1&mode=direct&dmLineSelectionAll=1&useRealtime=1&outputFormat=json'
+		const apiUrl_GB = api_prefix + "&limit=10&name_dm=de%3A08111%3A79';
+		const apiUrl_SG = api_prefix + "&limit=40&name_dm=de%3A08111%3A6024';
+		const apiUrl_SM = api_prefix + "&limit=20&name_dm=de%3A08111%3A6056%3A2%3A1';
 
         try {
             const valasz_GB = await fetch(apiUrl_GB);
