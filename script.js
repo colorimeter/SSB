@@ -32,16 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(`HTTP error: ${valasz_GB.status}`);
             }
 
-            const valasz_SG = await fetch(apiUrl_SG);
-            if (!valasz_SG.ok) {
-                throw new Error(`HTTP error: ${valasz_SG.status}`);
-            }
-
-			const valasz_SM = await fetch(apiUrl_SM);
-            if (!valasz_SM.ok) {
-                throw new Error(`HTTP error: ${valasz_SM.status}`);
-            }
-
 			/// Gaisburg
             var resp = await valasz_GB.json();
 
@@ -54,12 +44,23 @@ document.addEventListener('DOMContentLoaded', () => {
             eredmenyKontener1.textContent = varosba_str.join('\n');
             eredmenyKontener2.textContent = kifele_str.join('\n');
 
+			
+            const valasz_SG = await fetch(apiUrl_SG);
+            if (!valasz_SG.ok) {
+                throw new Error(`HTTP error: ${valasz_SG.status}`);
+            }
+
 			/// Staatsgalerie
 	   		resp = await valasz_SG.json();
 	   	    const haza = resp.departureList.filter(item => item.servingLine.symbol === "U4" && item.servingLine.direction.includes("Untertürkheim"));
             const haza_str = haza.map(item => msgformat(item.countdown,item.dateTime.hour,item.dateTime.minute,item.servingLine.direction));
-
             eredmenyKontener3.textContent = haza_str.join('\n');
+
+
+			const valasz_SM = await fetch(apiUrl_SM);
+            if (!valasz_SM.ok) {
+                throw new Error(`HTTP error: ${valasz_SM.status}`);
+            }
 
             /// Stadtmitte
 			resp = await valasz_SM.json();
